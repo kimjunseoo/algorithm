@@ -1,12 +1,10 @@
-from collections import deque
+def isPrime(a):
+
+    for i in range(2, int(a**0.5)+1):
+        if a % i == 0:
+            return False
+    return True
 
 
-arr = deque()
-
-arr.append(3)
-
-arr.append(3)
-
-n = arr.count(3)
-
-print(n)
+if isPrime(11) == True:
+    print("YEA")
