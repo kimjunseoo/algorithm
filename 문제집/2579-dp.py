@@ -1,20 +1,28 @@
+def recur(n):
+    global stair
+    global dp
+
+    if dp[n] != -1:
+        return dp[n]
+
+    dp[n] = max(recur(n-2) + stair[n], recur(n-3) + stair[n-1] + stair[n])
+
+    return dp[n]
+
+
 stair_count = int(input())
 
-stair_value = []
+stair = [0]
+dp = [ -1 for i in range(stair_count+1)]
 
-for _ in range(stair_count):
+for i in range(stair_count):
 
-    a = int(input())
+    stair.append(int(input()))
 
-    stair_value.append(a)
+dp[0] = 0
+dp[1] = stair[1]
+if stair_count > 1:
+    dp[2] = stair[2] + stair[1]
 
-dp = [-1 for _ in range(stair_count)]
-
-dp[0] = stair_value[0]
-dp[1] = stair_value[1]
-dp[2] = max(stair_value[0] + stair_value[1] + , stair_value[])
-
-for i in range(3, stair_count):
-    dp[i] = max(dp[i-1] + stair_value[i], dp[i-2] + stair_value[i])
-
+recur(stair_count)
 print(max(dp))
