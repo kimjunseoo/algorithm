@@ -1,4 +1,1 @@
-str = 'abcd+'
-
-if '+' in str:
-    print('sda')
+print("12"+"34")
