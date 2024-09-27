@@ -1,7 +1,4 @@
-import heapq
 
-arr = []
+arr = [list(map(int, input().split())) for _ in range(3)]
 
-arr.append((1, 1))
-
-print(arr[0][1])
+print(arr)
