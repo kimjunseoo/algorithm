@@ -2,51 +2,57 @@ from collections import deque
 
 N, M, V = map(int, input().split())
 
-graph = [[] for _ in range(N+1)]
+graph = [ [] for _ in range(N+1)]
 
+for i in range(M):
 
-dfs_visited = [ 0 for _ in range(N+1)]
-bfs_visited = [ 0 for _ in range(N+1)]
+    x, y = map(int, input().split())
 
-for _ in range(M):
-    a, b = map(int, input().split())
+    graph[x].append(y)
+    graph[y].append(x)
 
-    graph[a].append(b)
-    graph[b].append(a)
+graph = [sorted(inner_array) for inner_array in graph]
 
-dfs = []
-bfs = []
+ans_dfs = []
+v_dfs = [ 0 for _ in range(N+1)]
 
-def recur(node):
-
-    dfs_visited[node] = 1
-    dfs.append(node)
-
-    for nxt in graph[node]:
-
-        if dfs_visited[nxt] == 1:
-            continue
-
-        recur(nxt)
-
-recur(V)
-
+ans_bfs = []
+v_bfs = [ 0 for _ in range(N+1)]
 q = deque()
-
 q.append(V)
 
-while len(q) > 0: #큐가 0이 된다면 종료
+def dfs(c):
+    global ans_dfs
+    global v_dfs
 
-    node = q.popleft()
+    v_dfs[c] = 1
+    ans_dfs.append(c)
 
-    bfs_visited[node] = 1
-    bfs.append(node)
+    for n in graph[c]:
+        if v_dfs[n] == 0:
+            dfs(n)
 
-    for nxt in graph[node]:
-        if bfs_visited[nxt] == 1:
-            continue
+def bfs(c):
+    global q
 
-        q.append(nxt)
+    v_bfs[c] = 1
+    ans_bfs.append(c)
 
-print(dfs)
-print(bfs)
+    for n in graph[c]:
+        if v_bfs[n] == 0:
+            q.append(n)
+    
+while q:
+    
+    c = q.popleft()
+
+    if v_bfs[c] == 0:
+        bfs(c)
+
+dfs(V)
+
+for i in ans_dfs:
+    print(i, end=" ")
+print()
+for i in ans_bfs:
+    print(i, end=" ")
