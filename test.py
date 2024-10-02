@@ -1,4 +1,6 @@
 
-arr = [list(map(int, input().split())) for _ in range(3)]
+sadari = {}
 
-print(arr)
+sadari[1] = 100
+
+print(sadari[1])
