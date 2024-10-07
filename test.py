@@ -1,6 +1,7 @@
 
-sadari = {}
+str = "abcde"
 
-sadari[1] = 100
+print(str[1])
 
-print(sadari[1])
+for s in str:
+    print(s)
