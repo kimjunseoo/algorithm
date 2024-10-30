@@ -1,5 +1,7 @@
-a = "1"
+a, b, c = map(int, input().split())
 
-print(float(a))
+arr = [a, b, c]
+arr.sort()
 
-#음
+for i in range(3):
+    print(arr[i], end=' ')
